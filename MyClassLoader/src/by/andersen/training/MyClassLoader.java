@@ -12,16 +12,13 @@ public class MyClassLoader extends ClassLoader {
     private Map<String,Class<?>> cash = new HashMap<>();
     private String path;
 
+    //path - это полный путь до класса
     public MyClassLoader(String path) {
         this.path = path;
     }
 
-    /*private Map<String,String> classes = new HashMap<>();
-
-    public MyClassLoader(Map<String,String> classes) {
-        this.classes = classes;
-    }*/
-
+    // Метод добавляет твой загружаем класс в "Кэш"
+    // Параметр name - это название класса с его пакетом
     public void cashLoad(String name) {
         try {
             FileInputStream fin = new FileInputStream(path);
@@ -36,6 +33,7 @@ public class MyClassLoader extends ClassLoader {
         }
     }
 
+    // Параметр name - это название класса с его пакетом
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
         if(cash.containsKey(name)) {
